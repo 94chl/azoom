@@ -2,7 +2,8 @@
   <div>
     <NuxtRouteAnnouncer />
 
-    <div>TEST</div>
-    <NuxtPage />
+    <NuxtPage>
+      <TodoList />
+    </NuxtPage>
   </div>
 </template>
