@@ -12,6 +12,7 @@
   "dependencies": {
     "@nuxt/eslint": "^0.5.7",
     "@pinia/nuxt": "^0.5.4",
+    "light-uid": "^1.1.0",
     "nuxt": "^3.13.0",
     "vue": "latest",
     "vue-router": "latest"
