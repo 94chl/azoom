@@ -1,6 +1,6 @@
 import genUid from "light-uid";
 
-type todoListItemType = {
+export type todoListItemType = {
   id: string;
   title: string;
   content: string;
@@ -59,6 +59,11 @@ export const useTodoStore = defineStore("todoStore", {
     },
     deleteTodoListItem(listItemId: string) {
       if (this.todoList[listItemId]) delete this.todoList[listItemId];
+    },
+    updateTodoListItem(listItem: todoListItemType) {
+      if (this.todoList[listItem.id]) {
+        this.todoList[listItem.id] = listItem;
+      }
     },
   },
 });

@@ -6,28 +6,18 @@
         <button @click="addList">add</button>
       </div>
     </div>
-    <div
-      v-for="value in todoList"
-      :key="value.id"
-      style="display: flex; gap: 8px"
-    >
-      <input type="checkbox" :checked="value.status" />
-      <div>{{ value.title }}</div>
-      <button @click="deleteList(value.id)">delete</button>
+    <div v-for="value in todoList" :key="value.id">
+      <TodoListItem :list-item="value"></TodoListItem>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 const todoStore = useTodoStore();
-const { addTodoListItem, deleteTodoListItem } = todoStore;
+const { addTodoListItem } = todoStore;
 const { todoList } = storeToRefs(todoStore);
 
 const addList = () => {
   addTodoListItem();
-};
-
-const deleteList = (listItemId: string) => {
-  deleteTodoListItem(listItemId);
 };
 </script>
