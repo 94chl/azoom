@@ -26,18 +26,14 @@ export const useTodoStore = defineStore("todoStore", {
   state: (): todoStateType => ({
     todoList: {
       dummy1: {
+        ...initialListItem,
         id: "dummy1",
         title: "dummy",
-        content: "",
-        status: false,
-        date: undefined,
       },
       dummy10: {
+        ...initialListItem,
         id: "dummy10",
         title: "dummy10",
-        content: "",
-        status: true,
-        date: undefined,
       },
     },
   }),
@@ -59,11 +55,6 @@ export const useTodoStore = defineStore("todoStore", {
     },
     deleteTodoListItem(listItemId: string) {
       if (this.todoList[listItemId]) delete this.todoList[listItemId];
-    },
-    updateTodoListItem(listItem: todoListItemType) {
-      if (this.todoList[listItem.id]) {
-        this.todoList[listItem.id] = listItem;
-      }
     },
   },
 });
