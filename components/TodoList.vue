@@ -4,6 +4,7 @@
       <div>To-do List</div>
       <div>
         <button @click="addList">add</button>
+        <button @click="deleteListItems">delete</button>
       </div>
     </div>
     <TableRow>
@@ -21,10 +22,13 @@
 
 <script setup lang="ts">
 const todoStore = useTodoStore();
-const { addTodoListItem } = todoStore;
+const { addTodoListItem, deleteTodoListItems } = todoStore;
 const { todoList } = storeToRefs(todoStore);
 
 const addList = () => {
   addTodoListItem();
+};
+const deleteListItems = () => {
+  deleteTodoListItems();
 };
 </script>

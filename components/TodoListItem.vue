@@ -1,5 +1,6 @@
 <template>
   <TableRow>
+    <input type="checkbox" v-model="checked" @input="checkListStatus()" />
     <input type="checkbox" v-model="status" @input="updateListStatus()" />
     <input
       v-if="isEditing"
@@ -41,6 +42,7 @@ const id = props.listItemId;
 const todoStore = useTodoStore();
 const title = computed(() => todoStore.todoList[id].title);
 const status = computed(() => todoStore.todoList[id].status);
+const checked = computed(() => todoStore.todoList[id].checked);
 const { deleteTodoListItem } = todoStore;
 
 const isEditing = ref(false);
@@ -50,6 +52,12 @@ const deleteList = () => {
   deleteTodoListItem(id);
 };
 
+const checkListStatus = () => {
+  const targetListItem = todoStore.todoList[id];
+  if (targetListItem) {
+    targetListItem.checked = !targetListItem.checked;
+  }
+};
 const updateListStatus = () => {
   const targetListItem = todoStore.todoList[id];
   if (targetListItem) {

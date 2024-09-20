@@ -5,6 +5,7 @@ export type todoListItemType = {
   title: string;
   content: string;
   status: boolean;
+  checked: boolean;
   date?: Date;
   // order: number;
   // lastEditedDate: string;
@@ -15,6 +16,7 @@ const initialListItem: todoListItemType = {
   title: "",
   content: "",
   status: false,
+  checked: false,
   date: undefined,
 };
 
@@ -55,6 +57,12 @@ export const useTodoStore = defineStore("todoStore", {
     },
     deleteTodoListItem(listItemId: string) {
       if (this.todoList[listItemId]) delete this.todoList[listItemId];
+    },
+    deleteTodoListItems() {
+      Object.keys(this.todoList).forEach((listItemId) => {
+        const target = this.todoList[listItemId];
+        if (target.checked) delete this.todoList[listItemId];
+      });
     },
   },
 });
