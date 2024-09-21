@@ -6,6 +6,7 @@
         type="text"
         v-model="listItemInfo.title"
         @blur="changeIsEditing(false)"
+        @change="updateEditTime()"
         class="input"
         autofocus
       />
@@ -19,9 +20,16 @@
         >
       </div>
       <UDivider size="sm"></UDivider>
+      <div class="props">
+        <div class="date">
+          {{ listItemInfo.editDate.toLocaleString("ja-JP") }}
+        </div>
+      </div>
+      <UDivider size="sm"></UDivider>
       <UTextarea
         class="content"
         v-model="listItemInfo.content"
+        @change="updateEditTime()"
         resize
         textareaClass="textarea"
         placeholder="Content..."
@@ -37,6 +45,12 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+
+.props {
+  font-size: 0.8em;
+  display: flex;
+  flex-direction: column;
 }
 
 .title {
@@ -64,6 +78,10 @@ const isEditing = ref(false);
 
 const changeIsEditing = (value: boolean) => {
   isEditing.value = value;
+};
+
+const updateEditTime = () => {
+  listItemInfo.value.editDate = new Date();
 };
 
 onUnmounted(() => setIsOpenListModal());

@@ -11,7 +11,7 @@
       <div>check</div>
       <div>done</div>
       <div>title</div>
-      <div>delete</div>
+      <div>edit date</div>
     </TableRow>
     <div v-for="value in todoList" :key="value.id">
       <TodoListItem :list-item-id="value.id"></TodoListItem>

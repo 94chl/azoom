@@ -5,7 +5,7 @@
     <div @dblclick="openListModal()" class="title" :class="[{ done: status }]">
       {{ title }}
     </div>
-    <UButton @click="deleteList()">delete</UButton>
+    <div>{{ editDate.toLocaleString("ja-JP") }}</div>
   </TableRow>
 </template>
 
@@ -27,6 +27,7 @@ const todoStore = useTodoStore();
 const title = computed(() => todoStore.todoList[id].title);
 const status = computed(() => todoStore.todoList[id].status);
 const checked = computed(() => todoStore.todoList[id].checked);
+const editDate = computed(() => todoStore.todoList[id].editDate);
 const { deleteTodoListItem, setIsOpenListModal } = todoStore;
 
 const deleteList = () => {

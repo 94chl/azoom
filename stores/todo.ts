@@ -6,9 +6,8 @@ export type todoListItemType = {
   content: string;
   status: boolean;
   checked: boolean;
-  date?: Date;
+  editDate: Date;
   // order: number;
-  // lastEditedDate: string;
 };
 
 const initialListItem: todoListItemType = {
@@ -17,7 +16,7 @@ const initialListItem: todoListItemType = {
   content: "",
   status: false,
   checked: false,
-  date: undefined,
+  editDate: new Date(),
 };
 
 interface todoStateType {
@@ -54,7 +53,7 @@ export const useTodoStore = defineStore("todoStore", {
             ...initialListItem,
             title: newListItemId,
             id: newListItemId,
-            date: new Date(),
+            editDate: new Date(),
           };
         }
       }
