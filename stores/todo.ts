@@ -22,6 +22,8 @@ const initialListItem: todoListItemType = {
 
 interface todoStateType {
   todoList: Record<string, todoListItemType>;
+  isOpenListModal: boolean;
+  openedListItemId?: string;
 }
 
 export const useTodoStore = defineStore("todoStore", {
@@ -38,6 +40,8 @@ export const useTodoStore = defineStore("todoStore", {
         title: "dummy10",
       },
     },
+    isOpenListModal: false,
+    openedListItemId: undefined,
   }),
   actions: {
     addTodoListItem() {
@@ -64,5 +68,15 @@ export const useTodoStore = defineStore("todoStore", {
         if (target.checked) delete this.todoList[listItemId];
       });
     },
+    setIsOpenListModal(listItemId?: string) {
+      this.isOpenListModal = !!listItemId;
+      this.openedListItemId = listItemId;
+    },
+  },
+  getters: {
+    getOpenedListItem: (state) =>
+      state.openedListItemId
+        ? state.todoList[state.openedListItemId]
+        : initialListItem,
   },
 });

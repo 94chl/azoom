@@ -2,25 +2,9 @@
   <TableRow>
     <UCheckbox v-model="checked" @input="checkListStatus()" />
     <UCheckbox v-model="status" @input="updateListStatus()" />
-    <UInput
-      v-if="isEditing"
-      type="text"
-      v-model="title"
-      @input="onChangeListTitle($event)"
-      class="input"
-      autofocus
-    />
-    <div
-      v-else
-      @dblclick="updateListTitle()"
-      class="title"
-      :class="[{ done: status }]"
-    >
+    <div @dblclick="openListModal()" class="title" :class="[{ done: status }]">
       {{ title }}
     </div>
-    <UButton @click="updateListTitle()">
-      {{ isEditing ? "done" : "edit" }}
-    </UButton>
     <UButton @click="deleteList()">delete</UButton>
   </TableRow>
 </template>
@@ -43,10 +27,7 @@ const todoStore = useTodoStore();
 const title = computed(() => todoStore.todoList[id].title);
 const status = computed(() => todoStore.todoList[id].status);
 const checked = computed(() => todoStore.todoList[id].checked);
-const { deleteTodoListItem } = todoStore;
-
-const isEditing = ref(false);
-const newListTitle = ref(todoStore.todoList[id].title);
+const { deleteTodoListItem, setIsOpenListModal } = todoStore;
 
 const deleteList = () => {
   deleteTodoListItem(id);
@@ -65,15 +46,7 @@ const updateListStatus = () => {
   }
 };
 
-const onChangeListTitle = (e: Event) => {
-  newListTitle.value = (e.target as HTMLInputElement).value;
-};
-
-const updateListTitle = () => {
-  if (isEditing.value) {
-    const targetListItem = todoStore.todoList[id];
-    targetListItem.title = newListTitle.value;
-  }
-  isEditing.value = !isEditing.value;
+const openListModal = () => {
+  setIsOpenListModal(id);
 };
 </script>
