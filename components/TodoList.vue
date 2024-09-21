@@ -3,8 +3,8 @@
     <div>
       <div>To-do List</div>
       <div>
-        <button @click="addList">add</button>
-        <button @click="deleteListItems">delete</button>
+        <UButton @click="addList">add</UButton>
+        <UButton @click="deleteListItems">delete</UButton>
       </div>
     </div>
     <TableRow>

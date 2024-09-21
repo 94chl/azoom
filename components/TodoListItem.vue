@@ -1,8 +1,8 @@
 <template>
   <TableRow>
-    <input type="checkbox" v-model="checked" @input="checkListStatus()" />
-    <input type="checkbox" v-model="status" @input="updateListStatus()" />
-    <input
+    <UCheckbox v-model="checked" @input="checkListStatus()" />
+    <UCheckbox v-model="status" @input="updateListStatus()" />
+    <UInput
       v-if="isEditing"
       type="text"
       v-model="title"
@@ -18,10 +18,10 @@
     >
       {{ title }}
     </div>
-    <button @click="updateListTitle()">
+    <UButton @click="updateListTitle()">
       {{ isEditing ? "done" : "edit" }}
-    </button>
-    <button @click="deleteList()">delete</button>
+    </UButton>
+    <UButton @click="deleteList()">delete</UButton>
   </TableRow>
 </template>
 
