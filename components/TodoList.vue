@@ -11,7 +11,7 @@
       <UCheckbox v-model="isAllChecked" @change="toggleAllCheck"></UCheckbox>
       <ListSortButton
         :now-order-by="orderBy"
-        order-by="status"
+        order-by="done"
         :is-ascend="isAscend"
         :sort-list="sortList"
       ></ListSortButton>

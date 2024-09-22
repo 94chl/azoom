@@ -4,7 +4,7 @@ export type todoListItemType = {
   id: string;
   title: string;
   content: string;
-  status: boolean;
+  done: boolean;
   checked: boolean;
   editDate: Date;
 };
@@ -15,7 +15,7 @@ const initialListItem: todoListItemType = {
   id: "",
   title: "",
   content: "",
-  status: false,
+  done: false,
   checked: false,
   editDate: new Date(),
 };

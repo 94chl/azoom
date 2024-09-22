@@ -1,11 +1,11 @@
 <template>
   <TableRow>
     <UCheckbox v-model="targetListItem.checked" />
-    <UCheckbox v-model="targetListItem.status" />
+    <UCheckbox v-model="targetListItem.done" />
     <div
       @dblclick="openListModal()"
       class="title"
-      :class="[{ done: targetListItem.status }]"
+      :class="[{ done: targetListItem.done }]"
     >
       {{ targetListItem.title }}
     </div>
