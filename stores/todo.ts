@@ -50,7 +50,7 @@ export const useTodoStore = defineStore("todoStore", {
         } else {
           this.todoList[newListItemId] = {
             ...initialListItem,
-            title: newListItemId,
+            title: "new list",
             id: newListItemId,
             editDate: new Date(),
           };
