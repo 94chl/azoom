@@ -1,11 +1,15 @@
 <template>
   <TableRow>
-    <UCheckbox v-model="checked" @input="checkListStatus()" />
-    <UCheckbox v-model="status" @input="updateListStatus()" />
-    <div @dblclick="openListModal()" class="title" :class="[{ done: status }]">
-      {{ title }}
+    <UCheckbox v-model="targetListItem.checked" />
+    <UCheckbox v-model="targetListItem.status" />
+    <div
+      @dblclick="openListModal()"
+      class="title"
+      :class="[{ done: targetListItem.status }]"
+    >
+      {{ targetListItem.title }}
     </div>
-    <div>{{ editDate.toLocaleString("ja-JP") }}</div>
+    <div>{{ targetListItem.editDate.toLocaleString("ja-JP") }}</div>
   </TableRow>
 </template>
 
@@ -24,28 +28,8 @@
 const props = defineProps<{ listItemId: string }>();
 const id = props.listItemId;
 const todoStore = useTodoStore();
-const title = computed(() => todoStore.todoList[id].title);
-const status = computed(() => todoStore.todoList[id].status);
-const checked = computed(() => todoStore.todoList[id].checked);
-const editDate = computed(() => todoStore.todoList[id].editDate);
-const { deleteTodoListItem, setIsOpenListModal } = todoStore;
-
-const deleteList = () => {
-  deleteTodoListItem(id);
-};
-
-const checkListStatus = () => {
-  const targetListItem = todoStore.todoList[id];
-  if (targetListItem) {
-    targetListItem.checked = !targetListItem.checked;
-  }
-};
-const updateListStatus = () => {
-  const targetListItem = todoStore.todoList[id];
-  if (targetListItem) {
-    targetListItem.status = !targetListItem.status;
-  }
-};
+const targetListItem = computed(() => todoStore.todoList[id]);
+const { setIsOpenListModal } = todoStore;
 
 const openListModal = () => {
   setIsOpenListModal(id);
