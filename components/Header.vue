@@ -1,0 +1,44 @@
+<template>
+  <div class="header">
+    <h1 class="headerTitle">To-do List</h1>
+    <div class="headerButtons">
+      <UButton @click="addList" icon="i-mdi-playlist-plus">add</UButton>
+      <UButton @click="deleteListItems" icon="i-mdi-playlist-remove"
+        >delete</UButton
+      >
+    </div>
+  </div>
+</template>
+
+<style>
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.headerTitle {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.headerButtons {
+  display: flex;
+  gap: 16px;
+  align-self: flex-end;
+}
+</style>
+
+<script setup lang="ts">
+const todoStore = useTodoStore();
+const { addTodoListItem, deleteTodoListItems } = todoStore;
+
+const addList = () => {
+  addTodoListItem();
+};
+
+const deleteListItems = () => {
+  deleteTodoListItems();
+};
+</script>
