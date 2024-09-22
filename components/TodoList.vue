@@ -5,9 +5,6 @@
       <div>
         <UButton @click="addList">add</UButton>
         <UButton @click="deleteListItems">delete</UButton>
-        <UButton @click="orderByTitle(titleOrder)"
-          >title order{{ titleOrder }}</UButton
-        >
       </div>
     </div>
     <TableRow>
@@ -27,7 +24,7 @@
 const todoStore = useTodoStore();
 const { addTodoListItem, deleteTodoListItems, sortByTitle } = todoStore;
 const { todoListOrder } = storeToRefs(todoStore);
-let titleOrder = ref(false);
+let titleOrder = ref(true);
 
 const addList = () => {
   addTodoListItem();
@@ -36,7 +33,7 @@ const deleteListItems = () => {
   deleteTodoListItems();
 };
 const orderByTitle = (ascend: boolean) => {
-  titleOrder.value = !titleOrder.value;
+  if (titleOrder.value !== ascend) titleOrder.value = ascend;
   sortByTitle(ascend);
 };
 </script>

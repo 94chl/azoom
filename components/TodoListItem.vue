@@ -1,13 +1,7 @@
 <template>
   <TableRow>
-    <UCheckbox
-      :value="targetListItem.checked"
-      @change="(value) => changeTargetListItemProp({ value, prop: 'checked' })"
-    />
-    <UCheckbox
-      :value="targetListItem.status"
-      @change="(value) => changeTargetListItemProp({ value, prop: 'status' })"
-    />
+    <UCheckbox v-model="targetListItem.checked" />
+    <UCheckbox v-model="targetListItem.status" />
     <div
       @dblclick="openListModal()"
       class="title"
@@ -33,19 +27,17 @@
 <script setup lang="ts">
 const props = defineProps<{ listItemId: string }>();
 const id = props.listItemId;
-const { seTTodoListItem, setIsOpenListModal, getListItemById } = useTodoStore();
-const targetListItem = computed(() => getListItemById(id));
+const todoStore = useTodoStore();
+const { setIsOpenListModal } = todoStore;
+const targetListItem = ref(todoStore.getListItemById(id));
 
-const changeTargetListItemProp = ({
-  value,
-  prop,
-}: {
-  value: boolean;
-  prop: keyof todoListItemType;
-}) => {
-  const newTargetListItem = { ...targetListItem.value, [prop]: value };
-  seTTodoListItem(newTargetListItem);
-};
+watch(
+  () => todoStore.getListItemById(id),
+  () => {
+    targetListItem.value = todoStore.getListItemById(id);
+  },
+  { deep: true }
+);
 
 const openListModal = () => {
   setIsOpenListModal(id);

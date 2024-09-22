@@ -66,7 +66,7 @@ export const useTodoStore = defineStore("todoStore", {
         if (target.checked) delete this.todoList[listItemId];
       });
     },
-    seTTodoListItem(todoListItem: todoListItemType) {
+    setTodoListItem(todoListItem: todoListItemType) {
       if (this.todoList[todoListItem.id])
         this.todoList[todoListItem.id] = todoListItem;
     },

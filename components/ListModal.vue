@@ -72,7 +72,7 @@
 
 <script setup lang="ts">
 const todoStore = useTodoStore();
-const { setIsOpenListModal, seTTodoListItem } = todoStore;
+const { setIsOpenListModal, setTodoListItem } = todoStore;
 const listItemInfo = computed(() => todoStore.getOpenedListItem);
 const isEditing = ref(false);
 
@@ -85,7 +85,7 @@ const changeTargetListItemProp = () => {
     ...listItemInfo.value,
     editDate: new Date(),
   };
-  seTTodoListItem(newTargetListItem);
+  setTodoListItem(newTargetListItem);
 };
 
 onUnmounted(() => setIsOpenListModal());
