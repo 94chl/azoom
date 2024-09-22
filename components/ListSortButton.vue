@@ -9,11 +9,16 @@
     trailing
     color="black"
     variant="link"
-    >{{ orderBy }}</UButton
+    >{{ text[orderBy] }}</UButton
   >
 </template>
 
 <script setup lang="ts">
+const text: Partial<Record<keyof todoListItemType, string>> = {
+  title: "Title",
+  editDate: "Edit date",
+  done: "Done",
+};
 const props = defineProps<{
   nowOrderBy: keyof todoListItemType;
   orderBy: keyof todoListItemType;

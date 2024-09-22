@@ -1,11 +1,11 @@
 <template>
-  <div class="root">
+  <div class="tableRow">
     <slot></slot>
   </div>
 </template>
 
 <style>
-.root {
+.tableRow {
   display: grid;
   grid-template-columns: 1fr 1fr 12fr 2fr;
   gap: 8px;

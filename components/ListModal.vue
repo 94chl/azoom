@@ -22,7 +22,8 @@
       </div>
       <UDivider size="sm"></UDivider>
       <div class="props">
-        <div class="date">
+        <div>Edit date :</div>
+        <div>
           {{ listItemInfo.editDate.toLocaleString("ja-JP") }}
         </div>
       </div>
@@ -51,7 +52,7 @@
 .props {
   font-size: 0.8em;
   display: flex;
-  flex-direction: column;
+  gap: 8px;
 }
 
 .modalTitle {

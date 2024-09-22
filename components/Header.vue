@@ -2,9 +2,9 @@
   <div class="header">
     <h1 class="headerTitle">To-do List</h1>
     <div class="headerButtons">
-      <UButton @click="addList" icon="i-mdi-playlist-plus">add</UButton>
+      <UButton @click="addList" icon="i-mdi-playlist-plus">Add</UButton>
       <UButton @click="deleteListItems" icon="i-mdi-playlist-remove"
-        >delete</UButton
+        >Delete</UButton
       >
     </div>
   </div>
