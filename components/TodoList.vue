@@ -80,7 +80,7 @@ const toggleAllCheck = () => {
 
 const unsubscribe = todoStore.$onAction(({ name, after }) => {
   after(() => {
-    if (name === "setTodoListItem") {
+    if (["setTodoListItem", "addTodoListItem"].includes(name)) {
       sortList({ newOrderBy: orderBy.value, newAscend: isAscend.value });
     }
   });

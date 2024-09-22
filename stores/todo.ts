@@ -54,17 +54,29 @@ export const useTodoStore = defineStore("todoStore", {
             id: newListItemId,
             editDate: new Date(),
           };
+          this.todoListOrder.push(newListItemId);
         }
       }
     },
     deleteTodoListItem(listItemId: string) {
-      if (this.todoList[listItemId]) delete this.todoList[listItemId];
+      const todoListOrderIndex = this.todoListOrder.findIndex(
+        (orderListItemId) => orderListItemId === listItemId
+      );
+      if (this.todoList[listItemId] && todoListOrderIndex > -1) {
+        this.todoListOrder.slice(todoListOrderIndex, 1);
+        delete this.todoList[listItemId];
+      }
     },
     deleteTodoListItems() {
-      Object.keys(this.todoList).forEach((listItemId) => {
+      const newListOrder = this.todoListOrder.filter((listItemId) => {
         const target = this.todoList[listItemId];
-        if (target.checked) delete this.todoList[listItemId];
+        if (target.checked) {
+          delete this.todoList[listItemId];
+          return false;
+        }
+        return true;
       });
+      this.todoListOrder = newListOrder;
     },
     setTodoListItem(todoListItem: todoListItemType) {
       if (this.todoList[todoListItem.id])
@@ -73,17 +85,6 @@ export const useTodoStore = defineStore("todoStore", {
     setIsOpenListModal(listItemId?: string) {
       this.isOpenListModal = !!listItemId;
       this.openedListItemId = listItemId;
-    },
-    sortByTitle(ascend: boolean) {
-      this.todoListOrder.sort((a, b) => {
-        let result = 0;
-        if (ascend) {
-          result = this.todoList[a].title >= this.todoList[b].title ? 1 : -1;
-        } else {
-          result = this.todoList[a].title <= this.todoList[b].title ? 1 : -1;
-        }
-        return result;
-      });
     },
     sortList({
       orderBy,
