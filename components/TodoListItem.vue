@@ -2,13 +2,15 @@
   <TableRow>
     <UCheckbox v-model="targetListItem.checked" />
     <UCheckbox v-model="targetListItem.done" />
-    <div
-      @dblclick="openListModal()"
-      class="title"
+    <UButton
+      @click="openListModal()"
+      class="listTitle"
       :class="[{ done: targetListItem.done }]"
+      color="white"
+      variant="ghost"
     >
       {{ targetListItem.title }}
-    </div>
+    </UButton>
     <div>{{ targetListItem.editDate.toLocaleString("ja-JP") }}</div>
   </TableRow>
 </template>
@@ -19,8 +21,14 @@
   width: 100%;
 }
 
-.title.done {
-  text-decoration: line-through;
+.listTitle {
+  text-decoration: underline;
+  cursor: pointer;
+
+  &.done {
+    text-decoration: underline line-through;
+    color: #999;
+  }
 }
 </style>
 

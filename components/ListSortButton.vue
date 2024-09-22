@@ -7,6 +7,8 @@
         : undefined
     "
     trailing
+    color="black"
+    variant="link"
     >{{ orderBy }}</UButton
   >
 </template>

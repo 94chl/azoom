@@ -1,43 +1,49 @@
 <template>
-  <div>
+  <div id="root">
+    <Header></Header>
     <div>
-      <div>To-do List</div>
-      <div>
-        <UButton @click="addList">add</UButton>
-        <UButton @click="deleteListItems">delete</UButton>
-      </div>
-    </div>
-    <TableRow>
-      <UCheckbox v-model="isAllChecked" @change="toggleAllCheck"></UCheckbox>
-      <ListSortButton
-        :now-order-by="orderBy"
-        order-by="done"
-        :is-ascend="isAscend"
-        :sort-list="sortList"
-      ></ListSortButton>
-      <ListSortButton
-        :now-order-by="orderBy"
-        order-by="title"
-        :is-ascend="isAscend"
-        :sort-list="sortList"
-      ></ListSortButton>
-      <ListSortButton
-        :now-order-by="orderBy"
-        order-by="editDate"
-        :is-ascend="isAscend"
-        :sort-list="sortList"
-      ></ListSortButton>
-    </TableRow>
-    <div v-for="value in todoListOrder" :key="value">
-      <TodoListItem :list-item-id="value"></TodoListItem>
+      <TableRow>
+        <UCheckbox v-model="isAllChecked" @change="toggleAllCheck"></UCheckbox>
+        <ListSortButton
+          :now-order-by="orderBy"
+          order-by="done"
+          :is-ascend="isAscend"
+          :sort-list="sortList"
+        ></ListSortButton>
+        <ListSortButton
+          :now-order-by="orderBy"
+          order-by="title"
+          :is-ascend="isAscend"
+          :sort-list="sortList"
+        ></ListSortButton>
+        <ListSortButton
+          :now-order-by="orderBy"
+          order-by="editDate"
+          :is-ascend="isAscend"
+          :sort-list="sortList"
+        ></ListSortButton>
+      </TableRow>
+      <TodoListItem
+        v-for="value in todoListOrder"
+        :key="value"
+        :list-item-id="value"
+      ></TodoListItem>
     </div>
     <ListModal></ListModal>
   </div>
 </template>
 
+<style>
+#root {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+</style>
+
 <script setup lang="ts">
 const todoStore = useTodoStore();
-const { addTodoListItem, deleteTodoListItems } = todoStore;
 const { todoListOrder } = storeToRefs(todoStore);
 let isAscend = ref(true);
 let orderBy = ref<keyof todoListItemType>("title");
@@ -46,14 +52,6 @@ const isAllChecked = computed(
     Object.values(todoStore.todoList).filter(({ checked }) => !checked).length <
     1
 );
-
-const addList = () => {
-  addTodoListItem();
-};
-
-const deleteListItems = () => {
-  deleteTodoListItems();
-};
 
 const sortList = ({
   newOrderBy,

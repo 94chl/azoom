@@ -10,14 +10,15 @@
         class="input"
         autofocus
       />
-      <div v-else class="title">
+      <div v-else class="modalTitle">
         <div>{{ listItemInfo.title }}</div>
         <UButton
           v-if="!isEditing"
           @click="changeIsEditing(true)"
           icon="i-mdi-pencil"
-          >edit</UButton
-        >
+          color="gray"
+          variant="solid"
+        ></UButton>
       </div>
       <UDivider size="sm"></UDivider>
       <div class="props">
@@ -53,12 +54,12 @@
   flex-direction: column;
 }
 
-.title {
+.modalTitle {
   height: 2rem;
   font-size: 1.2em;
   font-weight: bold;
   display: flex;
-  gap: 16px;
+  gap: 8px;
 }
 
 .content {
