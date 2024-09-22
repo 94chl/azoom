@@ -8,7 +8,7 @@
       </div>
     </div>
     <TableRow>
-      <div>check</div>
+      <UCheckbox v-model="isAllChecked" @change="toggleAllCheck"></UCheckbox>
       <ListSortButton
         :now-order-by="orderBy"
         order-by="status"
@@ -41,6 +41,11 @@ const { addTodoListItem, deleteTodoListItems } = todoStore;
 const { todoListOrder } = storeToRefs(todoStore);
 let isAscend = ref(true);
 let orderBy = ref<keyof todoListItemType>("title");
+const isAllChecked = computed(
+  () =>
+    Object.values(todoStore.todoList).filter(({ checked }) => !checked).length <
+    1
+);
 
 const addList = () => {
   addTodoListItem();
@@ -64,6 +69,13 @@ const sortList = ({
     isAscend.value = newAscend;
   }
   todoStore.sortList({ orderBy: orderBy.value, isAscend: isAscend.value });
+};
+
+const toggleAllCheck = () => {
+  const nextValue = !isAllChecked.value;
+  Object.values(todoStore.todoList).forEach((todoList) => {
+    todoList.checked = nextValue;
+  });
 };
 
 const unsubscribe = todoStore.$onAction(({ name, after }) => {
