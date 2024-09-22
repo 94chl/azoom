@@ -6,7 +6,7 @@
         type="text"
         v-model="listItemInfo.title"
         @blur="changeIsEditing(false)"
-        @change="updateEditTime()"
+        @change="changeTargetListItemProp"
         class="input"
         autofocus
       />
@@ -29,7 +29,7 @@
       <UTextarea
         class="content"
         v-model="listItemInfo.content"
-        @change="updateEditTime()"
+        @change="changeTargetListItemProp"
         resize
         textareaClass="textarea"
         placeholder="Content..."
@@ -72,7 +72,7 @@
 
 <script setup lang="ts">
 const todoStore = useTodoStore();
-const { setIsOpenListModal } = todoStore;
+const { setIsOpenListModal, seTTodoListItem } = todoStore;
 const listItemInfo = computed(() => todoStore.getOpenedListItem);
 const isEditing = ref(false);
 
@@ -80,8 +80,12 @@ const changeIsEditing = (value: boolean) => {
   isEditing.value = value;
 };
 
-const updateEditTime = () => {
-  listItemInfo.value.editDate = new Date();
+const changeTargetListItemProp = () => {
+  const newTargetListItem = {
+    ...listItemInfo.value,
+    editDate: new Date(),
+  };
+  seTTodoListItem(newTargetListItem);
 };
 
 onUnmounted(() => setIsOpenListModal());

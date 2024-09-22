@@ -7,8 +7,9 @@ export type todoListItemType = {
   status: boolean;
   checked: boolean;
   editDate: Date;
-  // order: number;
 };
+
+type todoList = Record<string, todoListItemType>;
 
 const initialListItem: todoListItemType = {
   id: "",
@@ -19,26 +20,24 @@ const initialListItem: todoListItemType = {
   editDate: new Date(),
 };
 
+const todoListOrder = ["dummy1", "dummy2", "dummy3"];
+const todoListDummy = () =>
+  todoListOrder.reduce((acc: todoList, cur) => {
+    acc[cur] = { ...initialListItem, id: cur, title: cur };
+    return acc;
+  }, {});
+
 interface todoStateType {
-  todoList: Record<string, todoListItemType>;
+  todoList: todoList;
+  todoListOrder: string[];
   isOpenListModal: boolean;
   openedListItemId?: string;
 }
 
 export const useTodoStore = defineStore("todoStore", {
   state: (): todoStateType => ({
-    todoList: {
-      dummy1: {
-        ...initialListItem,
-        id: "dummy1",
-        title: "dummy",
-      },
-      dummy10: {
-        ...initialListItem,
-        id: "dummy10",
-        title: "dummy10",
-      },
-    },
+    todoList: todoListDummy(),
+    todoListOrder: todoListOrder,
     isOpenListModal: false,
     openedListItemId: undefined,
   }),
@@ -67,12 +66,29 @@ export const useTodoStore = defineStore("todoStore", {
         if (target.checked) delete this.todoList[listItemId];
       });
     },
+    seTTodoListItem(todoListItem: todoListItemType) {
+      if (this.todoList[todoListItem.id])
+        this.todoList[todoListItem.id] = todoListItem;
+    },
     setIsOpenListModal(listItemId?: string) {
       this.isOpenListModal = !!listItemId;
       this.openedListItemId = listItemId;
     },
+    sortByTitle(ascend: boolean) {
+      this.todoListOrder.sort((a, b) => {
+        let result = 0;
+        if (ascend) {
+          result = this.todoList[a].title > this.todoList[b].title ? 1 : -1;
+        } else {
+          result = this.todoList[a].title < this.todoList[b].title ? 1 : -1;
+        }
+        return result;
+      });
+    },
   },
   getters: {
+    getListItemById: (state) => (listItemId: string) =>
+      state.todoList[listItemId],
     getOpenedListItem: (state) =>
       state.openedListItemId
         ? state.todoList[state.openedListItemId]

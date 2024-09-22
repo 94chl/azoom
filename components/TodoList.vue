@@ -5,6 +5,9 @@
       <div>
         <UButton @click="addList">add</UButton>
         <UButton @click="deleteListItems">delete</UButton>
+        <UButton @click="orderByTitle(titleOrder)"
+          >title order{{ titleOrder }}</UButton
+        >
       </div>
     </div>
     <TableRow>
@@ -13,8 +16,8 @@
       <div>title</div>
       <div>edit date</div>
     </TableRow>
-    <div v-for="value in todoList" :key="value.id">
-      <TodoListItem :list-item-id="value.id"></TodoListItem>
+    <div v-for="value in todoListOrder" :key="value">
+      <TodoListItem :list-item-id="value"></TodoListItem>
     </div>
     <ListModal></ListModal>
   </div>
@@ -22,13 +25,18 @@
 
 <script setup lang="ts">
 const todoStore = useTodoStore();
-const { addTodoListItem, deleteTodoListItems } = todoStore;
-const { todoList } = storeToRefs(todoStore);
+const { addTodoListItem, deleteTodoListItems, sortByTitle } = todoStore;
+const { todoListOrder } = storeToRefs(todoStore);
+let titleOrder = ref(false);
 
 const addList = () => {
   addTodoListItem();
 };
 const deleteListItems = () => {
   deleteTodoListItems();
+};
+const orderByTitle = (ascend: boolean) => {
+  titleOrder.value = !titleOrder.value;
+  sortByTitle(ascend);
 };
 </script>
