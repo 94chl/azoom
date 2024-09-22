@@ -9,9 +9,24 @@
     </div>
     <TableRow>
       <div>check</div>
-      <div>done</div>
-      <div>title</div>
-      <div>edit date</div>
+      <ListSortButton
+        :now-order-by="orderBy"
+        order-by="status"
+        :is-ascend="isAscend"
+        :sort-list="sortList"
+      ></ListSortButton>
+      <ListSortButton
+        :now-order-by="orderBy"
+        order-by="title"
+        :is-ascend="isAscend"
+        :sort-list="sortList"
+      ></ListSortButton>
+      <ListSortButton
+        :now-order-by="orderBy"
+        order-by="editDate"
+        :is-ascend="isAscend"
+        :sort-list="sortList"
+      ></ListSortButton>
     </TableRow>
     <div v-for="value in todoListOrder" :key="value">
       <TodoListItem :list-item-id="value"></TodoListItem>
@@ -22,18 +37,48 @@
 
 <script setup lang="ts">
 const todoStore = useTodoStore();
-const { addTodoListItem, deleteTodoListItems, sortByTitle } = todoStore;
+const { addTodoListItem, deleteTodoListItems } = todoStore;
 const { todoListOrder } = storeToRefs(todoStore);
-let titleOrder = ref(true);
+let isAscend = ref(true);
+let orderBy = ref<keyof todoListItemType>("title");
 
 const addList = () => {
   addTodoListItem();
 };
+
 const deleteListItems = () => {
   deleteTodoListItems();
 };
-const orderByTitle = (ascend: boolean) => {
-  if (titleOrder.value !== ascend) titleOrder.value = ascend;
-  sortByTitle(ascend);
+
+const sortList = ({
+  newOrderBy,
+  newAscend,
+}: {
+  newOrderBy: keyof todoListItemType;
+  newAscend: boolean;
+}) => {
+  if (orderBy.value !== newOrderBy) {
+    orderBy.value = newOrderBy;
+    isAscend.value = true;
+  } else {
+    isAscend.value = newAscend;
+  }
+  todoStore.sortList({ orderBy: orderBy.value, isAscend: isAscend.value });
 };
+
+const unsubscribe = todoStore.$onAction(({ name, after }) => {
+  after(() => {
+    if (name === "setTodoListItem") {
+      sortList({ newOrderBy: orderBy.value, newAscend: isAscend.value });
+    }
+  });
+});
+
+onMounted(() => {
+  sortList({ newOrderBy: orderBy.value, newAscend: isAscend.value });
+});
+
+onUnmounted(() => {
+  unsubscribe();
+});
 </script>

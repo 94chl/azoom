@@ -78,9 +78,28 @@ export const useTodoStore = defineStore("todoStore", {
       this.todoListOrder.sort((a, b) => {
         let result = 0;
         if (ascend) {
-          result = this.todoList[a].title > this.todoList[b].title ? 1 : -1;
+          result = this.todoList[a].title >= this.todoList[b].title ? 1 : -1;
         } else {
-          result = this.todoList[a].title < this.todoList[b].title ? 1 : -1;
+          result = this.todoList[a].title <= this.todoList[b].title ? 1 : -1;
+        }
+        return result;
+      });
+    },
+    sortList({
+      orderBy,
+      isAscend,
+    }: {
+      orderBy: keyof todoListItemType;
+      isAscend: boolean;
+    }) {
+      this.todoListOrder.sort((a, b) => {
+        const prevValue = this.todoList[a][orderBy];
+        const nextValue = this.todoList[b][orderBy];
+        let result = 0;
+        if (isAscend) {
+          result = prevValue >= nextValue ? 1 : -1;
+        } else {
+          result = prevValue <= nextValue ? 1 : -1;
         }
         return result;
       });
