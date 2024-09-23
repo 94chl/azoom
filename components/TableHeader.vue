@@ -1,6 +1,6 @@
 <template>
   <TableRow>
-    <div>Flag</div>
+    <div class="tableRowText">Flag</div>
     <UCheckbox v-model="isAllChecked" @change="toggleAllCheck"></UCheckbox>
     <ListSortButton
       :now-order-by="orderBy"
@@ -22,6 +22,12 @@
     ></ListSortButton>
   </TableRow>
 </template>
+
+<style>
+.tableRowText {
+  font-size: 14px;
+}
+</style>
 
 <script setup lang="ts">
 const todoStore = useTodoStore();
