@@ -4,6 +4,8 @@
 
     <NuxtPage>
       <TodoList />
+      <ListDeleteModal />
+      <ListModal />
     </NuxtPage>
   </div>
 </template>

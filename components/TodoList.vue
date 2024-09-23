@@ -9,7 +9,6 @@
         :list-item-id="value"
       ></TodoListItem>
     </div>
-    <ListModal></ListModal>
   </div>
 </template>
 

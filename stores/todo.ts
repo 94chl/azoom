@@ -25,6 +25,7 @@ interface todoStateType {
   todoListOrder: string[];
   flagIds: Set<string>;
   isOpenListModal: boolean;
+  isOpenListDeleteModal: boolean;
   openedListItemId?: string;
 }
 
@@ -34,6 +35,7 @@ export const useTodoStore = defineStore("todoStore", {
     todoListOrder: [],
     flagIds: new Set<string>(),
     isOpenListModal: false,
+    isOpenListDeleteModal: false,
     openedListItemId: undefined,
   }),
   actions: {

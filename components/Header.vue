@@ -3,7 +3,10 @@
     <h1 class="headerTitle">To-do List</h1>
     <div class="headerButtons">
       <UButton @click="addList" icon="i-mdi-playlist-plus">Add</UButton>
-      <UButton @click="deleteListItems" icon="i-mdi-playlist-remove"
+      <UButton
+        @click="openDeleteModal"
+        icon="i-mdi-playlist-remove"
+        :disabled="checkedListItems.length < 1"
         >Delete</UButton
       >
     </div>
@@ -33,13 +36,16 @@
 <script setup lang="ts">
 const todoStore = useTodoStore();
 const { addTodoListDummy, addTodoListItem, deleteTodoListItems } = todoStore;
+const checkedListItems = computed(() =>
+  Object.values(todoStore.todoList).filter((listItem) => listItem.checked)
+);
 
 const addList = () => {
   addTodoListItem();
 };
 
-const deleteListItems = () => {
-  deleteTodoListItems();
+const openDeleteModal = () => {
+  todoStore.isOpenListDeleteModal = true;
 };
 
 onMounted(() => {
