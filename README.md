@@ -1,5 +1,3 @@
-# Nuxt 3 Minimal Starter
-
 # To-do List for Azoom
 
 Simple To-do List web application for Azoom.
@@ -15,7 +13,8 @@ It produces some simple function for users.
 
 ## Deploy
 
-It deployed by [github-page](https://94chl.github.io/azoom/);
+It deployed by
+<a href="https://94chl.github.io/azoom/" target="_blank">github-page</a>
 
 You can use it without any install or build.
 
@@ -35,7 +34,7 @@ Start the development server on `http://localhost:3000`:
 npm run dev
 ```
 
-## Function
+## Functions
 
 ### Add
 
@@ -55,7 +54,7 @@ After end your edit, "Edit date" property update automatically.
 
 You can delete To-do list by click "Delete" button.
 
-Before delete list, you should check list you want to delete.
+Before delete list, you should check a checkbox of list you want to delete.
 
 Then you click the "Delete" button, all checked list will be deleted.
 
@@ -69,16 +68,16 @@ You can sort To-do list by specific order(ascend or descend)
 
 ### Flag
 
-You can set "Flag" list for priority list.
+You can set "Flag" list for priority order.
 
 If you click "Flag" icon for each list, that list will be replaced in top.
 
 It is not affected by sort.
 
-You can easily remove "Flag" by click icon.
+You can easily remove "Flag" by clicking icon.
 
 ### Done
 
-You can set "Done" property for list what be finished.
+You can set "Done" property for what be finished.
 
 "Done" list will be showed with line-through and gray color.

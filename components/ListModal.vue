@@ -22,7 +22,7 @@
       </div>
       <UDivider size="sm"></UDivider>
       <div class="props">
-        <div>Edit date :</div>
+        <div>Edited date :</div>
         <div>
           {{ listItemInfo.editDate.toLocaleString("ja-JP") }}
         </div>

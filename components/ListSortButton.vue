@@ -18,7 +18,7 @@
 <script setup lang="ts">
 const text: Partial<Record<keyof todoListItemType, string>> = {
   title: "Title",
-  editDate: "Edit date",
+  editDate: "Edited date",
   done: "Done",
 };
 const props = defineProps<{
