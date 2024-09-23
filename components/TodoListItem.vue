@@ -1,5 +1,11 @@
 <template>
   <TableRow>
+    <UButton
+      @click="toggleFlag"
+      :icon="`i-mdi-flag${flagIds.has(targetListItem.id) ? '' : '-variant-outline'}`"
+      color="white"
+      variant="ghost"
+    ></UButton>
     <UCheckbox v-model="targetListItem.checked" />
     <UCheckbox v-model="targetListItem.done" />
     <UButton
@@ -36,8 +42,20 @@
 const props = defineProps<{ listItemId: string }>();
 const id = props.listItemId;
 const todoStore = useTodoStore();
-const { setIsOpenListModal } = todoStore;
+const { setIsOpenListModal, sortListByFlag } = todoStore;
+const { flagIds } = storeToRefs(todoStore);
 const targetListItem = ref(todoStore.getListItemById(id));
+
+const toggleFlag = () => {
+  const targetId = targetListItem.value.id;
+  const isFlagged = flagIds.value.has(targetId);
+  if (isFlagged) {
+    flagIds.value.delete(targetId);
+  } else {
+    flagIds.value.add(targetId);
+  }
+  sortListByFlag();
+};
 
 watch(
   () => todoStore.getListItemById(id),

@@ -1,5 +1,6 @@
 <template>
   <TableRow>
+    <div>Flag</div>
     <UCheckbox v-model="isAllChecked" @change="toggleAllCheck"></UCheckbox>
     <ListSortButton
       :now-order-by="orderBy"
@@ -59,6 +60,9 @@ const unsubscribe = todoStore.$onAction(({ name, after }) => {
   after(() => {
     if (["setTodoListItem", "addTodoListItem"].includes(name)) {
       sortList({ newOrderBy: orderBy.value, newAscend: isAscend.value });
+    }
+    if (name === "sortList" && todoStore.flagIds.size > 0) {
+      todoStore.sortListByFlag();
     }
   });
 });

@@ -30,6 +30,7 @@ const todoListDummy = () =>
 interface todoStateType {
   todoList: todoList;
   todoListOrder: string[];
+  flagIds: Set<string>;
   isOpenListModal: boolean;
   openedListItemId?: string;
 }
@@ -38,6 +39,7 @@ export const useTodoStore = defineStore("todoStore", {
   state: (): todoStateType => ({
     todoList: todoListDummy(),
     todoListOrder: todoListOrder,
+    flagIds: new Set<string>(),
     isOpenListModal: false,
     openedListItemId: undefined,
   }),
@@ -104,6 +106,12 @@ export const useTodoStore = defineStore("todoStore", {
         }
         return result;
       });
+    },
+    sortListByFlag() {
+      const newOrder = this.todoListOrder
+        .filter((id) => this.flagIds.has(id))
+        .concat(this.todoListOrder.filter((id) => !this.flagIds.has(id)));
+      this.todoListOrder = newOrder;
     },
   },
   getters: {
