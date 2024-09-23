@@ -32,7 +32,7 @@
 
 <script setup lang="ts">
 const todoStore = useTodoStore();
-const { addTodoListItem, deleteTodoListItems } = todoStore;
+const { addTodoListDummy, addTodoListItem, deleteTodoListItems } = todoStore;
 
 const addList = () => {
   addTodoListItem();
@@ -41,4 +41,8 @@ const addList = () => {
 const deleteListItems = () => {
   deleteTodoListItems();
 };
+
+onMounted(() => {
+  if (todoStore.todoListOrder.length < 1) addTodoListDummy();
+});
 </script>
