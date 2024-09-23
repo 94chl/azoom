@@ -21,9 +21,14 @@ const initialListItem: todoListItemType = {
 };
 
 const todoListOrder = ["dummy1", "dummy2", "dummy3"];
-const todoListDummy = () =>
+const generateTodoListDummy = () =>
   todoListOrder.reduce((acc: todoList, cur) => {
-    acc[cur] = { ...initialListItem, id: cur, title: cur };
+    acc[cur] = {
+      ...initialListItem,
+      id: cur,
+      title: cur,
+      editDate: new Date(),
+    };
     return acc;
   }, {});
 
@@ -37,7 +42,7 @@ interface todoStateType {
 
 export const useTodoStore = defineStore("todoStore", {
   state: (): todoStateType => ({
-    todoList: todoListDummy(),
+    todoList: generateTodoListDummy(),
     todoListOrder: todoListOrder,
     flagIds: new Set<string>(),
     isOpenListModal: false,
