@@ -1,23 +1,30 @@
 # Nuxt 3 Minimal Starter
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+# To-do List for Azoom
+
+Simple To-do List web application for Azoom.
+
+It produces some simple function for users.
+
+## Environment
+
+- Nuxt3
+- Typescript
+- Pinia
+- Nuxt UI
+
+## Deploy
+
+It deployed by [github-page](https://94chl.github.io/azoom/);
+
+You can use it without any install or build.
 
 ## Setup
 
 Make sure to install the dependencies:
 
 ```bash
-# npm
 npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
 ```
 
 ## Development Server
@@ -25,51 +32,53 @@ bun install
 Start the development server on `http://localhost:3000`:
 
 ```bash
-# npm
 npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
-## Production
+## Function
 
-Build the application for production:
+### Add
 
-```bash
-# npm
-npm run build
+You can add To-do list by click "Add" button.
 
-# pnpm
-pnpm run build
+### Edit
 
-# yarn
-yarn build
+You can edit To-do list by click list title.
 
-# bun
-bun run build
-```
+If you click list title, edit modal will be opened.
 
-Locally preview production build:
+Then you can edit list "Title" and "Content" for detail information.
 
-```bash
-# npm
-npm run preview
+After end your edit, "Edit date" property update automatically.
 
-# pnpm
-pnpm run preview
+### Delete
 
-# yarn
-yarn preview
+You can delete To-do list by click "Delete" button.
 
-# bun
-bun run preview
-```
+Before delete list, you should check list you want to delete.
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+Then you click the "Delete" button, all checked list will be deleted.
+
+### Sort
+
+You can sort To-do list by specific order(ascend or descend)
+
+- Title(default)
+- Edit date
+- Done
+
+### Flag
+
+You can set "Flag" list for priority list.
+
+If you click "Flag" icon for each list, that list will be replaced in top.
+
+It is not affected by sort.
+
+You can easily remove "Flag" by click icon.
+
+### Done
+
+You can set "Done" property for list what be finished.
+
+"Done" list will be showed with line-through and gray color.
