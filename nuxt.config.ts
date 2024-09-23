@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   compatibilityDate: "2024-04-03",
   devtools: { enabled: true },
-  modules: ["@pinia/nuxt", "@nuxt/eslint", "@nuxt/ui"],
+  modules: ["@pinia/nuxt", "@nuxt/eslint", "@nuxt/ui", "@nuxt/icon"],
   alias: {
     pinia: "/node_modules/@pinia/nuxt/node_modules/pinia/dist/pinia.mjs",
   },
