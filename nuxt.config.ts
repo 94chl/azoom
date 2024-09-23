@@ -5,7 +5,12 @@ export default defineNuxtConfig({
   modules: ["@pinia/nuxt", "@nuxt/eslint", "@nuxt/ui", "@nuxt/icon"],
   icon: {
     serverBundle: {
-      collections: ["heroicons", "mdi"],
+      collections: ["mdi"],
+    },
+    clientBundle: {
+      icons: ["mdi"],
+      scan: true,
+      sizeLimitKb: 256,
     },
   },
   alias: {
