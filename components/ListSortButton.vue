@@ -3,7 +3,9 @@
     @click="sortList({ newOrderBy: orderBy, newAscend: !isAscend })"
     :icon="
       nowOrderBy === orderBy
-        ? `i-mdi-sort-${!isAscend ? 'descending' : 'ascending'}`
+        ? isAscend
+          ? 'i-mdi-sort-ascending'
+          : 'i-mdi-sort-descending'
         : undefined
     "
     trailing

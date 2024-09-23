@@ -2,7 +2,11 @@
   <TableRow>
     <UButton
       @click="toggleFlag"
-      :icon="`i-mdi-flag${flagIds.has(targetListItem.id) ? '' : '-variant-outline'}`"
+      :icon="
+        flagIds.has(targetListItem.id)
+          ? 'i-mdi-flag'
+          : 'i-mdi-flag-variant-outline'
+      "
       color="white"
       variant="ghost"
     ></UButton>
