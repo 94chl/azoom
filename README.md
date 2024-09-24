@@ -81,3 +81,9 @@ You can easily remove "Flag" by clicking icon.
 You can set "Done" property for what be finished.
 
 "Done" list will be showed with line-through and gray color.
+
+### Pagination
+
+You can handle To-do list by pagination.
+
+And you can adjust the number of list per page.
