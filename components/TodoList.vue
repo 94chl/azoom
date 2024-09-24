@@ -46,7 +46,7 @@
 const todoStore = useTodoStore();
 const { todoListOrder } = storeToRefs(todoStore);
 const page = ref(1);
-const numOfList = ["3", "5", "10", "30", "50"];
+const numOfList = ["5", "10", "30", "50"];
 const selectedNumOfList = ref(numOfList[0]);
 
 watch(
