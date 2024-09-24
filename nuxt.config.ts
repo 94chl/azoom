@@ -25,7 +25,7 @@ export default defineNuxtConfig({
   app: {
     head: {
       title: "To-do List for Azoom",
-      link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
+      link: [{ rel: "icon", type: "image/x-icon", href: "/azoom/favicon.ico" }],
     },
   },
 });
