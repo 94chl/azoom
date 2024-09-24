@@ -22,4 +22,10 @@ export default defineNuxtConfig({
   pinia: {
     storesDirs: ["./stores/**"],
   },
+  app: {
+    head: {
+      title: "To-do List for Azoom",
+      link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
+    },
+  },
 });
