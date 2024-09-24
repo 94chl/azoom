@@ -1,11 +1,11 @@
 <template>
-  <div id="root">
+  <div id="todoList">
     <Header></Header>
     <div>
       <TableHeader></TableHeader>
       <TodoListItem
         v-for="value in todoListOrder"
-        :key="value"
+        :key="`todoList_${value}`"
         :list-item-id="value"
       ></TodoListItem>
     </div>
@@ -13,7 +13,7 @@
 </template>
 
 <style>
-#root {
+#todoList {
   padding: 32px;
   display: flex;
   flex-direction: column;
@@ -24,4 +24,8 @@
 <script setup lang="ts">
 const todoStore = useTodoStore();
 const { todoListOrder } = storeToRefs(todoStore);
+
+onMounted(() => {
+  if (todoStore.todoListOrder.length < 1) todoStore.addTodoListDummy();
+});
 </script>

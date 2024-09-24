@@ -35,7 +35,7 @@
 
 <script setup lang="ts">
 const todoStore = useTodoStore();
-const { addTodoListDummy, addTodoListItem, deleteTodoListItems } = todoStore;
+const { addTodoListItem } = todoStore;
 const checkedListItems = computed(() =>
   Object.values(todoStore.todoList).filter((listItem) => listItem.checked)
 );
@@ -47,8 +47,4 @@ const addList = () => {
 const openDeleteModal = () => {
   todoStore.isOpenListDeleteModal = true;
 };
-
-onMounted(() => {
-  if (todoStore.todoListOrder.length < 1) addTodoListDummy();
-});
 </script>
